@@ -1,6 +1,19 @@
-export * from './api-client.final'
+function client(endpoint, customConfig = {}) {
+  const config = {
+    method: 'GET',
+    ...customConfig,
+  }
 
-// export * from './api-client.exercise'
+  return window
+    .fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, config)
+    .then(async response => {
+      const data = await response.json()
+      if (response.ok) {
+        return data
+      } else {
+        return Promise.reject(data)
+      }
+    })
+}
 
-// 💯 handle failed requests
-// export * from './api-client.extra-1'
+export {client}
