@@ -3,6 +3,8 @@ import {useQuery, queryCache} from 'react-query'
 // 🐨 get AuthContext from context/auth-context
 import {client} from './api-client'
 import bookPlaceholderSvg from 'assets/book-placeholder.svg'
+import {AuthContext} from '../context/auth-context.exercise'
+import {useContext} from 'react'
 
 const loadingBook = {
   title: 'Loading...',
@@ -36,15 +38,15 @@ const getBookSearchConfig = (query, user) => ({
 })
 
 // 💣 remove the user argument here
-function useBookSearch(query, user) {
-  // 🐨 get the user from React.useContext(AuthContext)
+function useBookSearch(query) {
+  const {user} = useContext(AuthContext)
   const result = useQuery(getBookSearchConfig(query, user))
   return {...result, books: result.data ?? loadingBooks}
 }
 
 // 💣 remove the user argument here
-function useBook(bookId, user) {
-  // 🐨 get the user from React.useContext(AuthContext)
+function useBook(bookId) {
+  const {user} = useContext(AuthContext)
   const {data} = useQuery({
     queryKey: ['book', {bookId}],
     queryFn: () =>

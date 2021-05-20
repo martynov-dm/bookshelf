@@ -10,12 +10,10 @@ import * as colors from 'styles/colors'
 import {BookRow} from 'components/book-row'
 import {BookListUL, Spinner, Input} from 'components/lib'
 
-// 💣 remove the user prop here
-function DiscoverBooksScreen({user}) {
+function DiscoverBooksScreen() {
   const [query, setQuery] = React.useState('')
   const [queried, setQueried] = React.useState(false)
-  // 💣 remove the user argument here
-  const {books, error, status} = useBookSearch(query, user)
+  const {books, error, status} = useBookSearch(query)
   // 🐨 use the new useRefetchBookSearchQuery to get the
   // refetchBookSearchQuery function which handles accessing the user
 
