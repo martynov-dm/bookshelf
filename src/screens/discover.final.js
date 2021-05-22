@@ -8,15 +8,18 @@ import {useBookSearch, useRefetchBookSearchQuery} from 'utils/books'
 import * as colors from 'styles/colors'
 import {BookRow} from 'components/book-row'
 import {BookListUL, Spinner, Input} from 'components/lib'
+import {useContext} from 'react'
+import {AuthContext} from '../context/auth-context.exercise'
 
 function DiscoverBooksScreen() {
+  const {user} = useContext(AuthContext)
   const [query, setQuery] = React.useState('')
   const [queried, setQueried] = React.useState(false)
   const {books, error, status} = useBookSearch(query)
   const refetchBookSearchQuery = useRefetchBookSearchQuery()
 
   React.useEffect(() => {
-    return () => refetchBookSearchQuery()
+    return () => refetchBookSearchQuery(user)
   }, [refetchBookSearchQuery])
 
   const isLoading = status === 'loading'

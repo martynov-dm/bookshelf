@@ -61,23 +61,11 @@ function BookScreen() {
                 minHeight: 100,
               }}
             >
-              {book.loadingBook ? null : (
-                <StatusButtons
-                  // 💣 remove the user prop here
-                  user={user}
-                  book={book}
-                />
-              )}
+              {book.loadingBook ? null : <StatusButtons book={book} />}
             </div>
           </div>
           <div css={{marginTop: 10, height: 46}}>
-            {listItem?.finishDate ? (
-              <Rating
-                // 💣 remove the user prop here
-                user={user}
-                listItem={listItem}
-              />
-            ) : null}
+            {listItem?.finishDate ? <Rating listItem={listItem} /> : null}
             {listItem ? <ListItemTimeframe listItem={listItem} /> : null}
           </div>
           <br />
@@ -85,11 +73,7 @@ function BookScreen() {
         </div>
       </div>
       {!book.loadingBook && listItem ? (
-        <NotesTextarea
-          // 💣 remove the user prop here
-          user={user}
-          listItem={listItem}
-        />
+        <NotesTextarea listItem={listItem} />
       ) : null}
     </div>
   )

@@ -5,9 +5,8 @@ import * as React from 'react'
 import {Input, Button, Spinner, FormGroup, ErrorMessage} from './components/lib'
 import {Modal, ModalContents, ModalOpenButton} from './components/modal'
 import {Logo} from './components/logo'
-// 🐨 get AuthContext from ./context/auth-context
 import {useAsync} from './utils/hooks'
-import {AuthContext} from './context/auth-context.exercise'
+import {useAuth} from './context/auth-context.exercise'
 
 function LoginForm({onSubmit, submitButton}) {
   const {isLoading, isError, error, run} = useAsync()
@@ -63,7 +62,7 @@ function LoginForm({onSubmit, submitButton}) {
 // you'll no longer receive the login and register functions as props
 // 💣 remove the props
 function UnauthenticatedApp() {
-  const {login, register} = React.useContext(AuthContext)
+  const {login, register} = useAuth()
   return (
     <div
       css={{
